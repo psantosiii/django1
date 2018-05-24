@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+		{% load static %}
+        <link rel="stylesheet" href="{% static 'quotes_app/css/style.css'%}">
+	<title>Login/Registration</title>
+</head>
+<body>
+	<fieldset>
+		<legend><h3>Register</h3></legend>
+	<form action="/register" method="post">
+	{% csrf_token %}
+		
+		<input type="text" name="name" placeholder="Name"><br>
+		<input type="text" name="alias" placeholder="Alias"><br>
+		<input type="text" name="email" placeholder="Email"><br>
+		<input type="password" name="password" placeholder="Password"><br>
+		<input type="password" name="password_confirmation" placeholder="Confirm Password">		
+		<input type="submit" value="Register">
+	</form>
+	</fieldset>
+	{% if messages %}
+		{% for message in messages%}
+			{% if 'registration' in message.tags %}
+				<p>{{message}}</p>
+			{% endif %}
+		{%endfor%}
+	{% endif %}
+	<fieldset>
+		<legend><h3>Login</h3></legend>
+	<form action="/login" method="post">
+	{% csrf_token %}
+		<input type="text" name="email" placeholder="Email"><br>
+		<input type="password" name="password" placeholder="Password">
+		<input type="submit" value="Login">
+	</form>
+	</fieldset>
+	{% if messages %}
+		{% for message in messages%}
+			{% if 'login' in message.tags %}
+				<p>{{message}}</p>
+			{% endif %}
+		{%endfor%}
+	{% endif %}
+</body>
+</html>
